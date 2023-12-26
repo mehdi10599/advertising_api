@@ -16,11 +16,11 @@ class CreateUserLotteryHistoryTable extends Migration
         Schema::create('user_lottery_history', function (Blueprint $table) {
             $table->string('user_id');
             $table->string('lottery_id');
-            $table->integer('join_times');
-            $table->string('result');
-            $table->string('helios_id');
-            $table->boolean('payment_status');
-            $table->timestamp('payment_date');
+            $table->integer('join_times')->default(0);
+            $table->enum('result', ['isRunning', 'waiting','win','lose'])->default('isRunning');
+            $table->string('helios_id')->nullable();
+            $table->boolean('payment_status')->default(false);
+            $table->timestamp('payment_date')->nullable();
             $table->timestamps();
 
             $table->primary(['user_id','lottery_id']);

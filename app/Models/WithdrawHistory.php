@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class WithdrawHistory extends Model
 {
     use HasFactory;
+    protected $table = 'user_withdraw_history';
     protected $fillable = [
         'user_id',
         'helios_id',
+        'golds',
+        'gems',
+        'ads',
         'payment_status',
         'payment_date',
     ];

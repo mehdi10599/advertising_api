@@ -19,10 +19,10 @@ class CreateUsersTable extends Migration
             $table->integer('golds')->default(0);
             $table->integer('gems')->default(0);
             $table->integer('ads')->default(0);
-            $table->string('location');
-            $table->string('user_ip');
+            $table->string('location')->nullable();
+            $table->string('user_ip')->nullable();
             $table->boolean('status')->default(true);
-            $table->timestamp('last_ad_seen');
+            $table->timestamp('last_ad_seen')->nullable();
             $table->timestamps();
 
             $table->unique('user_id');

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserLotteryHistory extends Model
 {
     use HasFactory;
+    public $table = 'user_lottery_history';
+    protected $primaryKey = 'user_id';
     protected $fillable = [
         'user_id',
         'lottery_id',

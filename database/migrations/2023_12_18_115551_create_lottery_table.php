@@ -18,10 +18,10 @@ class CreateLotteryTable extends Migration
             $table->string('lottery_id');
             $table->integer('price');
             $table->integer('required_gold');
-            $table->integer('required_gem');
             $table->integer('subscriber_count');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
+            $table->boolean('status')->default(false);
             $table->timestamps();
 
             $table->unique('lottery_id');

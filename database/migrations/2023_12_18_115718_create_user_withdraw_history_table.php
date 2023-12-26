@@ -17,11 +17,13 @@ class CreateUserWithdrawHistoryTable extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('helios_id');
-            $table->boolean('payment_status');
-            $table->timestamp('payment_date');
+            $table->integer('golds');
+            $table->integer('gems');
+            $table->integer('ads');
+            $table->boolean('payment_status')->default(false);
+            $table->timestamp('payment_date')->nullable();
             $table->timestamps();
 
-            $table->unique('user_id');
             $table->foreign('user_id')->references('user_id')->on('users');
 
         });
