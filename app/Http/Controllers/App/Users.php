@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App;
 
-use Carbon\Carbon;
-use DateTime;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use function response;
 
 class Users extends Controller
 {

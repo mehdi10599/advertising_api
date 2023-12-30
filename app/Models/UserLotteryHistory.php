@@ -10,6 +10,7 @@ class UserLotteryHistory extends Model
     use HasFactory;
     public $table = 'user_lottery_history';
     protected $primaryKey = 'user_id';
+    public $incrementing = false;
     protected $fillable = [
         'user_id',
         'lottery_id',

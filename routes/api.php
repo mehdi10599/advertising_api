@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\Settings;
-use App\Http\Controllers\UserLotteryHistory;
-use App\Http\Controllers\Users;
-use App\Http\Controllers\Lottery;
-use App\Http\Controllers\WithdrawHistory;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\AdminSettings;
+use App\Http\Controllers\Admin\AdminWithdrawHistory;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\Home;
+use App\Http\Controllers\Admin\LotteryList;
+use App\Http\Controllers\App\Lottery;
+use App\Http\Controllers\App\Settings;
+use App\Http\Controllers\App\UserLotteryHistory;
+use App\Http\Controllers\App\Users;
+use App\Http\Controllers\App\WithdrawHistory;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', 'App\Http\Controllers\TestController@test');
+Route::get('/test', 'App\Http\Controllers\App\TestController@test');
 
 Route::group(['prefix' => 'app/v1'], function () {
     Route::post('/user_exist',[Users::class, 'userExist']);
@@ -23,4 +27,24 @@ Route::group(['prefix' => 'app/v1'], function () {
     Route::post('/increase_golds_gems_ads',[Users::class, 'increaseGoldsGemsAds']);
     Route::post('/create_user_lottery_history',[UserLotteryHistory::class, 'createUserLotteryHistory']);
     Route::post('/get_lottery_history',[UserLotteryHistory::class, 'getLotteryHistory']);
+});
+
+
+
+Route::group(['prefix' => 'admin/v1'], function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+    Route::post('/get_all_users', [Home::class, 'getAllUsers'])->middleware('auth:sanctum');
+    Route::post('/ban_unban_user', [Home::class, 'banUnbanUser'])->middleware('auth:sanctum');
+    Route::post('/get_all_lottery_boxes', [LotteryList::class, 'getAllLotteryBoxes'])->middleware('auth:sanctum');
+    Route::post('/get_lottery_subscribers', [LotteryList::class, 'getLotterySubscribers'])->middleware('auth:sanctum');
+    Route::post('/get_lottery_winners', [LotteryList::class, 'getLotteryWinners'])->middleware('auth:sanctum');
+    Route::post('/create_lottery_box', [LotteryList::class, 'createLotteryBox'])->middleware('auth:sanctum');
+    Route::post('/change_user_lottery_result', [LotteryList::class, 'changeUserLotteryResult'])->middleware('auth:sanctum');
+    Route::post('/change_user_lottery_payment', [LotteryList::class, 'changeUserLotteryPayment'])->middleware('auth:sanctum');
+    Route::post('/get_all_withdraw_histories', [AdminWithdrawHistory::class, 'getAllWithdrawHistories'])->middleware('auth:sanctum');
+    Route::post('/change_withdraw_status', [AdminWithdrawHistory::class, 'changeWithdrawStatus'])->middleware('auth:sanctum');
+    Route::post('/get_settings', [AdminSettings::class, 'getSettings'])->middleware('auth:sanctum');
+    Route::post('/update_settings', [AdminSettings::class, 'updateSettings'])->middleware('auth:sanctum');
 });

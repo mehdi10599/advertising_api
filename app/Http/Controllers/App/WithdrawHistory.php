@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App;
 
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use function response;
 
 class WithdrawHistory extends Controller
 {
