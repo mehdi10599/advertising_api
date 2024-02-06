@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Users extends Model
 {
     use HasFactory;
+    protected $casts = [ 'golds' => 'string', 'gems' => 'string', 'ads' => 'string', 'status' => 'string' ];
     protected $fillable = [
         'user_id',
         'golds',

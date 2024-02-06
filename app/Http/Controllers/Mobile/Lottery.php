@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -28,7 +28,7 @@ class Lottery extends Controller
                     $lottery['join_times'] = $userLotteryHistory->join_times;
                 }
                 else{
-                    $lottery['join_times'] = 0;
+                    $lottery['join_times'] = '0';
                     $lottery['result'] = 'isRunning';
                 }
             }

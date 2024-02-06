@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
-use function response;
+use Illuminate\Http\Request;
 
-class Settings extends Controller
+class Shop extends Controller
 {
-    public function getSettings()
+    public function getShopItems()
     {
         try{
-            $result = \App\Models\Settings::first();
+            $result = \App\Models\Shop::all();
             return response($result,200);
         }
         catch (\Exception $exception){

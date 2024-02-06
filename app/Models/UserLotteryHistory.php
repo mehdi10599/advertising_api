@@ -11,6 +11,7 @@ class UserLotteryHistory extends Model
     public $table = 'user_lottery_history';
     protected $primaryKey = 'user_id';
     public $incrementing = false;
+    protected $casts = [ 'join_times' => 'string', 'payment_status' => 'string' ];
     protected $fillable = [
         'user_id',
         'lottery_id',

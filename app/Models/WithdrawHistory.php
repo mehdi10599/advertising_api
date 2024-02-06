@@ -9,6 +9,7 @@ class WithdrawHistory extends Model
 {
     use HasFactory;
     protected $table = 'user_withdraw_history';
+    protected $casts = [ 'golds' => 'string', 'gems' => 'string', 'ads' => 'string', 'payment_status' => 'string' ];
     protected $fillable = [
         'user_id',
         'helios_id',

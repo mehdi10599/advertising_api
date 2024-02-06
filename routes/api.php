@@ -1,18 +1,20 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminSettings;
+use App\Http\Controllers\Admin\AdminShop;
 use App\Http\Controllers\Admin\AdminWithdrawHistory;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\Home;
 use App\Http\Controllers\Admin\LotteryList;
-use App\Http\Controllers\App\Lottery;
-use App\Http\Controllers\App\Settings;
-use App\Http\Controllers\App\UserLotteryHistory;
-use App\Http\Controllers\App\Users;
-use App\Http\Controllers\App\WithdrawHistory;
+use App\Http\Controllers\Mobile\Lottery;
+use App\Http\Controllers\Mobile\Settings;
+use App\Http\Controllers\Mobile\Shop;
+use App\Http\Controllers\Mobile\UserLotteryHistory;
+use App\Http\Controllers\Mobile\Users;
+use App\Http\Controllers\Mobile\WithdrawHistory;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', 'App\Http\Controllers\App\TestController@test');
+Route::get('/test', 'App\Http\Controllers\Mobile\TestController@test');
 
 Route::group(['prefix' => 'app/v1'], function () {
     Route::post('/user_exist',[Users::class, 'userExist']);
@@ -27,6 +29,7 @@ Route::group(['prefix' => 'app/v1'], function () {
     Route::post('/increase_golds_gems_ads',[Users::class, 'increaseGoldsGemsAds']);
     Route::post('/create_user_lottery_history',[UserLotteryHistory::class, 'createUserLotteryHistory']);
     Route::post('/get_lottery_history',[UserLotteryHistory::class, 'getLotteryHistory']);
+    Route::post('/get_shop_items',[Shop::class, 'getShopItems']);
 });
 
 
@@ -47,4 +50,10 @@ Route::group(['prefix' => 'admin/v1'], function () {
     Route::post('/change_withdraw_status', [AdminWithdrawHistory::class, 'changeWithdrawStatus'])->middleware('auth:sanctum');
     Route::post('/get_settings', [AdminSettings::class, 'getSettings'])->middleware('auth:sanctum');
     Route::post('/update_settings', [AdminSettings::class, 'updateSettings'])->middleware('auth:sanctum');
+    Route::post('/get_shop_items', [AdminShop::class, 'getShopItems'])->middleware('auth:sanctum');
+    Route::post('/update_shop_items_url', [AdminShop::class, 'updateShopItemUrl'])->middleware('auth:sanctum');
+    Route::post('/update_shop_items_description', [AdminShop::class, 'updateShopItemDescription'])->middleware('auth:sanctum');
+    Route::post('/delete_shop_items', [AdminShop::class, 'deleteShopItem'])->middleware('auth:sanctum');
+    Route::post('/update_shop_items_image', [AdminShop::class, 'updateShopItemImage'])->middleware('auth:sanctum');
+    Route::post('/create_shop_items', [AdminShop::class, 'createShopItem'])->middleware('auth:sanctum');
 });

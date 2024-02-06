@@ -9,6 +9,7 @@ class Lottery extends Model
 {
     use HasFactory;
     public $table = 'lottery';
+    protected $casts = [ 'price' => 'string', 'required_gold' => 'string', 'subscriber_count' => 'string', 'status' => 'string' ];
     protected $fillable = [
         'lottery_id',
         'price',

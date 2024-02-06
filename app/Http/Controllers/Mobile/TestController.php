@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\App;
+namespace App\Http\Controllers\Mobile;
 
 use Illuminate\Routing\Controller as BaseController;
 use function response;
