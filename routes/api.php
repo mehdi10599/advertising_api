@@ -14,6 +14,7 @@ use App\Http\Controllers\Mobile\Users;
 use App\Http\Controllers\Mobile\WithdrawHistory;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/test', 'App\Http\Controllers\Mobile\TestController@test');
 
 Route::group(['prefix' => 'app/v1'], function () {
@@ -54,6 +55,6 @@ Route::group(['prefix' => 'admin/v1'], function () {
     Route::post('/update_shop_items_url', [AdminShop::class, 'updateShopItemUrl'])->middleware('auth:sanctum');
     Route::post('/update_shop_items_description', [AdminShop::class, 'updateShopItemDescription'])->middleware('auth:sanctum');
     Route::post('/delete_shop_items', [AdminShop::class, 'deleteShopItem'])->middleware('auth:sanctum');
-    Route::post('/update_shop_items_image', [AdminShop::class, 'updateShopItemImage'])->middleware(['auth:sanctum','cors']);
-    Route::post('/create_shop_items', [AdminShop::class, 'createShopItem'])->middleware(['auth:sanctum','cors']);
+    Route::post('/update_shop_items_image', [AdminShop::class, 'updateShopItemImage'])->middleware('auth:sanctum');
+    Route::post('/create_shop_items', [AdminShop::class, 'createShopItem'])->middleware('auth:sanctum');
 });
