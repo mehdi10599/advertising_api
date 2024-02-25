@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserActivity;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class WithdrawHistory extends Controller
                 $withDrawHistory->gems = $gems;
                 $withDrawHistory->ads = $ads;
                 $withDrawHistory->save();
+                $this->registerUserActivity($userId,$golds,$gems);
                 return response(['message'=>'request registered successfully'],200);
             }
             else{
@@ -52,6 +54,27 @@ class WithdrawHistory extends Controller
         catch (\Exception $exception){
             return  response()->json(['error'=>$exception->getMessage()],500);
         }
+    }
+
+    private function registerUserActivity($userId,$golds,$gems){
+        $amount1 = $golds;
+        $amount2 = $gems;
+        $type = "withdraw gold";
+        $time = Carbon::now();
+        $userActivity = new UserActivity();
+        $userActivity->user_id = $userId;
+        $userActivity->amount = -1*$amount1;
+        $userActivity->activity = $type;
+        $userActivity->time = $time;
+        $userActivity->save();
+
+        $type = "withdraw gem";
+        $userActivity = new UserActivity();
+        $userActivity->user_id = $userId;
+        $userActivity->amount = -1*$amount2;
+        $userActivity->activity = $type;
+        $userActivity->time = $time;
+        $userActivity->save();
     }
 
     public function getWithdrawHistory(Request $request)

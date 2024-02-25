@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserActivity;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -102,6 +103,7 @@ class UserLotteryHistory extends Controller
 
             $user->golds -= $lottery->required_gold;
             $user->save();
+            $this->registerUserActivity($userId,$lottery->required_gold);
 
             $userLotteryHistory = \App\Models\UserLotteryHistory::where('lottery_id',$lotteryId)->where('user_id',$userId)->first();
 
@@ -122,6 +124,16 @@ class UserLotteryHistory extends Controller
             return  response()->json(['error'=>$exception->getMessage()],500);
         }
 
+    }
+    private function registerUserActivity($userId,$golds){
+        $amount = $golds;
+        $type = "lottery gold";
+        $userActivity = new UserActivity();
+        $userActivity->user_id = $userId;
+        $userActivity->amount = -1*$amount;
+        $userActivity->activity = $type;
+        $userActivity->time = Carbon::now();
+        $userActivity->save();
     }
 
     public function getLotteryHistory(Request $request)

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserActivity;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use function response;
 
@@ -97,6 +99,8 @@ class Users extends Controller
             $gems = $request->gems;
             $ads = $request->ads;
 
+            $this->registerUserActivity($userId,$golds,$gems);
+
             $user = \App\Models\Users::where('user_id',$userId)->first();
             if($user != null){
                 $user->golds += $golds;
@@ -113,5 +117,18 @@ class Users extends Controller
             return  response()->json(['error'=>$exception->getMessage()],500);
         }
     }
+
+    private function registerUserActivity($userId,$golds,$gems){
+        $amount = $golds == 0 ? $gems : $golds;
+        $type = $golds == 0 ? "ads gem" : "ads gold";
+        $userActivity = new UserActivity();
+        $userActivity->user_id = $userId;
+        $userActivity->amount = $amount;
+        $userActivity->activity = $type;
+        $userActivity->time = Carbon::now();
+        $userActivity->save();
+    }
+
+
 
 }

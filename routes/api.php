@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin/v1'], function () {
     Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
     Route::post('/get_all_users', [Home::class, 'getAllUsers'])->middleware('auth:sanctum');
     Route::post('/ban_unban_user', [Home::class, 'banUnbanUser'])->middleware('auth:sanctum');
+    Route::post('/get_user_activity',[Home::class, 'getUserActivity'])->middleware('auth:sanctum');
     Route::post('/get_all_lottery_boxes', [LotteryList::class, 'getAllLotteryBoxes'])->middleware('auth:sanctum');
     Route::post('/get_lottery_subscribers', [LotteryList::class, 'getLotterySubscribers'])->middleware('auth:sanctum');
     Route::post('/get_lottery_winners', [LotteryList::class, 'getLotteryWinners'])->middleware('auth:sanctum');
