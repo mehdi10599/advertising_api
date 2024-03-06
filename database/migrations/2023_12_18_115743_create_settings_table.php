@@ -21,6 +21,7 @@ class CreateSettingsTable extends Migration
             $table->integer('europe_token_prize');
             $table->integer('other_token_prize');
             $table->string('version');
+            $table->text('description');
             $table->timestamps();
         });
     }

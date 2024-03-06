@@ -30,6 +30,7 @@ class AdminSettings extends Controller
                 'europe_token_prize' => 'required|integer',
                 'other_token_prize' => 'required|integer',
                 'version' => 'required|string',
+                'description' => 'required|string',
             ]);
 
             $settings = Settings::first();
@@ -42,6 +43,7 @@ class AdminSettings extends Controller
             $settings->europe_token_prize = $request->europe_token_prize;
             $settings->other_token_prize = $request->other_token_prize;
             $settings->version = $request->version;
+            $settings->description = $request->description;
             $settings->save();
 
             return response(['result'=>true],200);
