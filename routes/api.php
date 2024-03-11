@@ -43,9 +43,11 @@ Route::group(['prefix' => 'admin/v1'], function () {
     Route::post('/ban_unban_user', [Home::class, 'banUnbanUser'])->middleware('auth:sanctum');
     Route::post('/get_user_activity',[Home::class, 'getUserActivity'])->middleware('auth:sanctum');
     Route::post('/get_all_lottery_boxes', [LotteryList::class, 'getAllLotteryBoxes'])->middleware('auth:sanctum');
+    Route::post('/get_lottery_box', [LotteryList::class, 'getLotteryBox'])->middleware('auth:sanctum');
     Route::post('/get_lottery_subscribers', [LotteryList::class, 'getLotterySubscribers'])->middleware('auth:sanctum');
     Route::post('/get_lottery_winners', [LotteryList::class, 'getLotteryWinners'])->middleware('auth:sanctum');
     Route::post('/create_lottery_box', [LotteryList::class, 'createLotteryBox'])->middleware('auth:sanctum');
+    Route::post('/update_lottery_box', [LotteryList::class, 'updateLotteryBox'])->middleware('auth:sanctum');
     Route::post('/change_user_lottery_result', [LotteryList::class, 'changeUserLotteryResult'])->middleware('auth:sanctum');
     Route::post('/change_user_lottery_payment', [LotteryList::class, 'changeUserLotteryPayment'])->middleware('auth:sanctum');
     Route::post('/get_all_withdraw_histories', [AdminWithdrawHistory::class, 'getAllWithdrawHistories'])->middleware('auth:sanctum');

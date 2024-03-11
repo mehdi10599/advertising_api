@@ -17,7 +17,7 @@ class Lottery extends Controller
                 'userId' => 'required|string|max:255',
             ]);
             $userId = $request->userId;
-            $lotteries = \App\Models\Lottery::where('status',true)->take(4)->orderBy('price','ASC')->get();
+            $lotteries = \App\Models\Lottery::where('status',true)->orderBy('price','DESC')->get();
             foreach ($lotteries as $lottery){
                 $lotteryId = $lottery->lottery_id;
                 $userLotteryHistory = \App\Models\UserLotteryHistory::where('lottery_id',$lotteryId)->where('user_id',$userId)->first();

@@ -23,6 +23,22 @@ class LotteryList extends Controller
         }
     }
 
+    public function getLotteryBox(Request $request)
+    {
+        try{
+            $request->validate([
+                'lotteryId' => 'required|string|max:255',
+            ]);
+            $lotteryId = $request->lotteryId;
+            $lottery = Lottery::where('lottery_id',$lotteryId)->first();
+
+            return response($lottery,200);
+        }
+        catch (\Exception $exception){
+            return  response()->json(['error'=>$exception->getMessage()],500);
+        }
+    }
+
     public function getLotterySubscribers(Request $request)
     {
         try{
@@ -98,6 +114,46 @@ class LotteryList extends Controller
                 $newLottery ->end_time = $end_time;
                 $newLottery ->status = $status;
                 $newLottery->save();
+                return response(['result'=>true],200);
+            }
+            else{
+                return response(['result'=>false],200);
+            }
+        }
+        catch (\Exception $exception){
+            return  response()->json(['error'=>$exception->getMessage(),'trace'=>$exception->getTrace()],500);
+        }
+    }
+
+    public function updateLotteryBox(Request $request)
+    {
+        try{
+            $request->validate([
+                'lottery_id' => 'required|string|max:255',
+                'price' => 'required|integer',
+                'required_gold' => 'required|integer',
+                'subscriber_count' => 'required|integer',
+                'start_time' => 'required|String',
+                'end_time' => 'required|String',
+                'status' => 'required|bool',
+            ]);
+            $lottery_id = $request->lottery_id;
+            $price = $request->price;
+            $required_gold = $request->required_gold;
+            $subscriber_count = $request->subscriber_count;
+            $start_time = $request->start_time;
+            $end_time = $request->end_time;
+            $status = $request->status;
+
+            $lottery = Lottery::where('lottery_id',$lottery_id)->first();
+            if($lottery != null){
+                $lottery ->price = $price;
+                $lottery ->required_gold = $required_gold;
+                $lottery ->subscriber_count = $subscriber_count;
+                $lottery ->start_time = $start_time;
+                $lottery ->end_time = $end_time;
+                $lottery ->status = $status;
+                $lottery->save();
                 return response(['result'=>true],200);
             }
             else{
